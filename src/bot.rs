@@ -50,6 +50,7 @@ pub async fn bot_next(
     if tool_calls.is_empty() {
         tracing::warn!("No tool calls in response");
     }
+    tracing::info!("{:#?}", tool_calls);
 
     let mut new_history: Vec<ChatCompletionRequestMessage> =
         vec![ChatCompletionRequestMessage::Assistant(to_request_message(

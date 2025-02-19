@@ -30,7 +30,9 @@ impl Config {
     pub fn load_from_env() -> anyhow::Result<Self> {
         let path = config_path()?;
 
+        tracing::info!("checking for config at {}", path.display());
         let mut ret: Map<String, Value> = if path.exists() {
+            tracing::info!("loading config from {}", path.display());
             toml::from_str(&std::fs::read_to_string(path)?)?
         } else {
             Default::default()
